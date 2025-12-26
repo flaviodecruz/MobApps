@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RecipeService } from '../services/recipe.service';
 
 @Component({
   selector: 'app-home',
@@ -14,9 +15,13 @@ export class HomePage {
   ingredients: string = '';
   message: string = '';
 
+  constructor(private recipeService: RecipeService) {}
+
   searchRecipes() {
-    // For now, just prove the button works
-    this.message = `Searching for: ${this.ingredients}`;
-    console.log(this.message);
+    this.recipeService.searchRecipes(this.ingredients)
+      .subscribe(response => {
+        console.log(response);
+        this.message = `Found ${response.results.length} recipes`;
+      });
   }
 }
