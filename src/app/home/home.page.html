@@ -12,8 +12,10 @@
     [(ngModel)]="ingredients">
   </ion-input>
 
-  <ion-button expand="block">
+  <ion-button expand="block" (click)="searchRecipes()">
     Search
   </ion-button>
+
+  <p *ngIf="message">{{ message }}</p>
 
 </ion-content>

@@ -10,5 +10,13 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './home.page.html'
 })
 export class HomePage {
+
   ingredients: string = '';
+  message: string = '';
+
+  searchRecipes() {
+    // For now, just prove the button works
+    this.message = `Searching for: ${this.ingredients}`;
+    console.log(this.message);
+  }
 }
