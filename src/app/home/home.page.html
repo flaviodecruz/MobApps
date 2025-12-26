@@ -1,35 +1,56 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>G00438795</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="heart"></ion-icon>
+      </ion-button>
+
+      <ion-button>
+        <ion-icon name="settings"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
-  <ion-input
-    label="Enter Ingredients"
-    placeholder="carrots, beef, potatoes"
-    [(ngModel)]="ingredients">
-  </ion-input>
+  <ion-item>
+    <ion-label position="stacked">Enter Ingredients</ion-label>
+    <ion-input
+      placeholder="carrots, beef, potatoes"
+      [(ngModel)]="ingredients">
+    </ion-input>
+  </ion-item>
 
-  <ion-button expand="block" (click)="searchRecipes()">
-    Search
+  <ion-button
+    expand="block"
+    size="large"
+    color="primary"
+    (click)="searchRecipes()">
+    SEARCH
   </ion-button>
 
-  <ion-card *ngFor="let recipe of recipes">
+  <div class="recipe-grid">
 
-    <img [src]="recipe.image" />
+    <ion-card *ngFor="let recipe of recipes" class="recipe-card">
 
-    <ion-card-header>
-      <ion-card-title>{{ recipe.title }}</ion-card-title>
-    </ion-card-header>
+      <img [src]="recipe.image" alt="{{ recipe.title }}" />
 
-    <ion-card-content>
-      <ion-button expand="block">
-        View Details
-      </ion-button>
-    </ion-card-content>
+      <ion-card-header>
+        <ion-card-title>{{ recipe.title }}</ion-card-title>
+      </ion-card-header>
 
-  </ion-card>
+      <ion-card-content>
+        <ion-button expand="block" fill="outline">
+          View Details
+        </ion-button>
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
 
 </ion-content>
