@@ -1,21 +1,39 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>G00438795</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-page>
 
-<ion-content class="ion-padding">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>G00438795</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-  <ion-input
-    label="Enter Ingredients"
-    placeholder="carrots, beef, potatoes"
-    [(ngModel)]="ingredients">
-  </ion-input>
+  <ion-content class="ion-padding">
 
-  <ion-button expand="block" (click)="searchRecipes()">
-    Search
-  </ion-button>
+    <ion-input
+      label="Enter Ingredients"
+      placeholder="carrots, beef, potatoes"
+      [(ngModel)]="ingredients">
+    </ion-input>
 
-  <p *ngIf="message">{{ message }}</p>
+    <ion-button expand="block" (click)="searchRecipes()">
+      Search
+    </ion-button>
 
-</ion-content>
+    <ion-card *ngFor="let recipe of recipes">
+
+      <img [src]="recipe.image" />
+
+      <ion-card-header>
+        <ion-card-title>{{ recipe.title }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-button expand="block">
+          View Details
+        </ion-button>
+      </ion-card-content>
+
+    </ion-card>
+
+  </ion-content>
+
+</ion-page>

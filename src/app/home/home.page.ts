@@ -13,15 +13,17 @@ import { RecipeService } from '../services/recipe.service';
 export class HomePage {
 
   ingredients: string = '';
-  message: string = '';
+  recipes: any[] = [];
 
   constructor(private recipeService: RecipeService) {}
 
   searchRecipes() {
+    console.log('Searching for:', this.ingredients);
+
     this.recipeService.searchRecipes(this.ingredients)
-      .subscribe(response => {
-        console.log(response);
-        this.message = `Found ${response.results.length} recipes`;
+      .subscribe((response: any) => {
+        this.recipes = response.results;
+        console.log(this.recipes);
       });
   }
 }
