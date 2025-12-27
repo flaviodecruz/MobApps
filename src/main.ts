@@ -1,20 +1,25 @@
-import { addIcons } from 'ionicons';
-import { heart, settings } from 'ionicons/icons';
-
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
+import { provideIonicAngular } from '@ionic/angular/standalone';
 import { provideHttpClient } from '@angular/common/http';
 
 import { AppComponent } from './app/app.component';
-import { routes } from './app/app.routes';
-addIcons({
-  heart,
-  settings
-});
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideRouter(routes),
-    provideHttpClient()
-  ]
+    provideIonicAngular(),
+    provideHttpClient(), // ✅ THIS WAS MISSING
+    provideRouter([
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
+      },
+      {
+        path: 'home',
+        loadComponent: () =>
+          import('./app/home/home.page').then(m => m.HomePage),
+      },
+    ]),
+  ],
 });

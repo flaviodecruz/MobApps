@@ -1,23 +1,30 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
 
-  private apiUrl = 'https://api.spoonacular.com/recipes/complexSearch';
+  private readonly API_URL = 'https://api.spoonacular.com/recipes';
+  private readonly API_KEY = '621f6ee4a37f4fa28e403b6dff0abc42';
 
   constructor(private http: HttpClient) {}
 
-  searchRecipes(ingredients: string) {
-    return this.http.get<any>(this.apiUrl, {
-      params: {
-        includeIngredients: ingredients,
-        number: '10',
-        apiKey: environment.spoonacularApiKey
-      }
-    });
+  searchRecipes(ingredients: string): Observable<any> {
+    const params = new HttpParams()
+      .set('query', ingredients)
+      .set('number', '10')
+      .set('apiKey', this.API_KEY);
+
+    return this.http.get(`${this.API_URL}/complexSearch`, { params });
+  }
+
+  getRecipeDetails(id: number): Observable<any> {
+    const params = new HttpParams()
+      .set('apiKey', this.API_KEY);
+
+    return this.http.get(`${this.API_URL}/${id}/information`, { params });
   }
 }
