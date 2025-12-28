@@ -27,6 +27,20 @@
 
       <h2>Instructions</h2>
       <p [innerHTML]="recipe.instructions"></p>
+      <ion-button
+  expand="block"
+  color="danger"
+  fill="outline"
+  (click)="toggleFavorite()">
+
+  <ion-icon
+    slot="start"
+    [name]="isFavorite() ? 'heart' : 'heart-outline'">
+  </ion-icon>
+
+  {{ isFavorite() ? 'Remove from Favorites' : 'Add to Favorites' }}
+
+</ion-button>
 
     </ion-card-content>
   </ion-card>

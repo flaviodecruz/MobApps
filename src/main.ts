@@ -6,13 +6,15 @@ import { provideHttpClient } from '@angular/common/http';
 import { AppComponent } from './app/app.component';
 
 import { addIcons } from 'ionicons';
-import { heart, heartOutline, settingsOutline } from 'ionicons/icons';
+import { heart, heartOutline, settings, settingsOutline } from 'ionicons/icons';
 
 addIcons({
   heart,
   heartOutline,
+  settings,
   settingsOutline,
 });
+
 
 bootstrapApplication(AppComponent, {
   providers: [

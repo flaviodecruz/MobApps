@@ -14,32 +14,45 @@ import { Router } from '@angular/router';
   styleUrls: ['./recipe-details.page.scss'],
 })
 export class RecipeDetailsPage implements OnInit {
+
   recipe: any;
   recipeId!: number;
+  favorites: number[] = [];
 
   constructor(
-  private route: ActivatedRoute,
-  private recipeService: RecipeService,
-  private router: Router
-) {}
-goBack() {
-  this.router.navigate(['/home']);
-}
-
+    private route: ActivatedRoute,
+    private recipeService: RecipeService
+  ) {}
 
   ngOnInit() {
     this.recipeId = Number(this.route.snapshot.paramMap.get('id'));
+    this.loadFavorites();
     this.loadRecipe();
   }
 
   loadRecipe() {
-    this.recipeService.getRecipeDetails(this.recipeId).subscribe({
-      next: (data) => {
-        this.recipe = data;
-      },
-      error: (err) => {
-        console.error('Failed to load recipe', err);
-      },
+    this.recipeService.getRecipeDetails(this.recipeId).subscribe(res => {
+      this.recipe = res;
     });
+  }
+
+  // ⭐ FAVORITES LOGIC (same as Home)
+
+  loadFavorites() {
+    const stored = localStorage.getItem('favorites');
+    this.favorites = stored ? JSON.parse(stored) : [];
+  }
+
+  isFavorite(): boolean {
+    return this.favorites.includes(this.recipeId);
+  }
+
+  toggleFavorite() {
+    if (this.isFavorite()) {
+      this.favorites = this.favorites.filter(id => id !== this.recipeId);
+    } else {
+      this.favorites.push(this.recipeId);
+    }
+    localStorage.setItem('favorites', JSON.stringify(this.favorites));
   }
 }
