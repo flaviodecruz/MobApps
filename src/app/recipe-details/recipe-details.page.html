@@ -7,34 +7,28 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content class="ion-padding">
 
-  <ng-container *ngIf="recipe; else loading">
+  <ion-card *ngIf="recipe">
+    <img *ngIf="recipe.image" [src]="recipe.image" />
 
-    <h2>{{ recipe.title }}</h2>
+    <ion-card-header>
+      <ion-card-title>{{ recipe.title }}</ion-card-title>
+    </ion-card-header>
 
-    <img
-      *ngIf="recipe.image"
-      [src]="recipe.image"
-      style="width: 100%; max-width: 400px;"
-    />
+    <ion-card-content>
 
-    <h3>Ingredients</h3>
-    <ul>
-      <li *ngFor="let ing of recipe.extendedIngredients">
-        {{ ing.original }}
-      </li>
-    </ul>
+      <h2>Ingredients</h2>
+      <ul>
+        <li *ngFor="let ingredient of recipe.extendedIngredients">
+          {{ ingredient.original }}
+        </li>
+      </ul>
 
-    <h3>Instructions</h3>
-    <p [innerHTML]="recipe.instructions"></p>
+      <h2>Instructions</h2>
+      <p [innerHTML]="recipe.instructions"></p>
 
-  </ng-container>
-
-  <ng-template #loading>
-    <ion-spinner></ion-spinner>
-    <p>Loading recipe...</p>
-  </ng-template>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

@@ -1,6 +1,9 @@
 ion-toolbar {
   --min-height: 64px;
 }
+ion-content {
+  --padding-bottom: env(safe-area-inset-bottom);
+}
 
 .recipe-grid {
   display: grid;
