@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '../services/recipe.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-recipe-details',
@@ -16,9 +18,14 @@ export class RecipeDetailsPage implements OnInit {
   recipeId!: number;
 
   constructor(
-    private route: ActivatedRoute,
-    private recipeService: RecipeService
-  ) {}
+  private route: ActivatedRoute,
+  private recipeService: RecipeService,
+  private router: Router
+) {}
+goBack() {
+  this.router.navigate(['/home']);
+}
+
 
   ngOnInit() {
     this.recipeId = Number(this.route.snapshot.paramMap.get('id'));

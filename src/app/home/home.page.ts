@@ -14,13 +14,18 @@ import { RecipeService } from '../services/recipe.service';
 })
 export class HomePage {
 
+  studentId = 'G00438795';
+
   ingredients = '';
   recipes: any[] = [];
+  favorites: number[] = [];
 
   constructor(
     private recipeService: RecipeService,
     private router: Router
-  ) {}
+  ) {
+    this.loadFavorites();
+  }
 
   searchRecipes() {
     if (!this.ingredients.trim()) return;
@@ -32,8 +37,26 @@ export class HomePage {
   }
 
   openDetails(id: number) {
-  console.log('Clicked recipe id:', id);
-  this.router.navigate(['/recipe', id]);
-}
+    this.router.navigate(['/recipe', id]);
+  }
 
+  // ⭐ FAVORITES LOGIC
+
+  loadFavorites() {
+    const stored = localStorage.getItem('favorites');
+    this.favorites = stored ? JSON.parse(stored) : [];
+  }
+
+  isFavorite(id: number): boolean {
+    return this.favorites.includes(id);
+  }
+
+  toggleFavorite(id: number) {
+    if (this.isFavorite(id)) {
+      this.favorites = this.favorites.filter(f => f !== id);
+    } else {
+      this.favorites.push(id);
+    }
+    localStorage.setItem('favorites', JSON.stringify(this.favorites));
+  }
 }

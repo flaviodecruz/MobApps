@@ -4,6 +4,12 @@ import { provideIonicAngular } from '@ionic/angular/standalone';
 import { provideHttpClient } from '@angular/common/http';
 
 import { AppComponent } from './app/app.component';
+import { addIcons } from 'ionicons';
+import { heart, heartOutline } from 'ionicons/icons';
+addIcons({
+  heart,
+  heartOutline,
+});
 
 bootstrapApplication(AppComponent, {
   providers: [
