@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Favorites</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-spinner *ngIf="loading"></ion-spinner>
+
+  <p *ngIf="!loading && recipes.length === 0">
+    No favorite recipes saved yet.
+  </p>
+
+  <ion-card *ngFor="let recipe of recipes">
+    <img *ngIf="recipe.image" [src]="recipe.image" />
+
+    <ion-card-header>
+      <ion-card-title>{{ recipe.title }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-button
+        expand="block"
+        fill="outline"
+        (click)="openDetails(recipe.id)">
+        View Details
+      </ion-button>
+
+      <ion-button
+        expand="block"
+        color="danger"
+        fill="clear"
+        (click)="removeFavorite(recipe.id)">
+        Remove from Favorites
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

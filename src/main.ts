@@ -15,23 +15,29 @@ bootstrapApplication(AppComponent, {
   providers: [
     provideIonicAngular(),
     provideHttpClient(),
-    provideRouter([
-      {
-        path: '',
-        redirectTo: 'home',
-        pathMatch: 'full',
-      },
-      {
-        path: 'home',
-        loadComponent: () =>
-          import('./app/home/home.page').then(m => m.HomePage),
-      },
-      {
-        path: 'recipe/:id',
-        loadComponent: () =>
-          import('./app/recipe-details/recipe-details.page')
-            .then(m => m.RecipeDetailsPage),
-      },
-    ]),
-  ],
+  provideRouter([
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
+  {
+    path: 'home',
+    loadComponent: () =>
+      import('./app/home/home.page').then(m => m.HomePage),
+  },
+  {
+    path: 'recipe/:id',
+    loadComponent: () =>
+      import('./app/recipe-details/recipe-details.page')
+        .then(m => m.RecipeDetailsPage),
+  },
+  {
+    path: 'favorites',
+    loadComponent: () =>
+      import('./app/favorites/favorites.page')
+        .then(m => m.FavoritesPage),
+  },
+]),
+ ],
 });
