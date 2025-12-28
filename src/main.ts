@@ -8,7 +8,7 @@ import { AppComponent } from './app/app.component';
 bootstrapApplication(AppComponent, {
   providers: [
     provideIonicAngular(),
-    provideHttpClient(), // ✅ THIS WAS MISSING
+    provideHttpClient(),
     provideRouter([
       {
         path: '',
@@ -19,6 +19,12 @@ bootstrapApplication(AppComponent, {
         path: 'home',
         loadComponent: () =>
           import('./app/home/home.page').then(m => m.HomePage),
+      },
+      {
+        path: 'recipe/:id',
+        loadComponent: () =>
+          import('./app/recipe-details/recipe-details.page')
+            .then(m => m.RecipeDetailsPage),
       },
     ]),
   ],

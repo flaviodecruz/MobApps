@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
-
 import { RecipeService } from '../services/recipe.service';
 
 @Component({
@@ -10,10 +9,11 @@ import { RecipeService } from '../services/recipe.service';
   standalone: true,
   imports: [IonicModule, CommonModule],
   templateUrl: './recipe-details.page.html',
+  styleUrls: ['./recipe-details.page.scss'],
 })
 export class RecipeDetailsPage implements OnInit {
-
   recipe: any;
+  recipeId!: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,11 +21,18 @@ export class RecipeDetailsPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.recipeId = Number(this.route.snapshot.paramMap.get('id'));
+    this.loadRecipe();
+  }
 
-    this.recipeService.getRecipeDetails(id)
-      .subscribe(res => {
-        this.recipe = res;
-      });
+  loadRecipe() {
+    this.recipeService.getRecipeDetails(this.recipeId).subscribe({
+      next: (data) => {
+        this.recipe = data;
+      },
+      error: (err) => {
+        console.error('Failed to load recipe', err);
+      },
+    });
   }
 }

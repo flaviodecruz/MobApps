@@ -32,6 +32,8 @@ export class HomePage {
   }
 
   openDetails(id: number) {
-    this.router.navigate(['/recipe', id]);
-  }
+  console.log('Clicked recipe id:', id);
+  this.router.navigate(['/recipe', id]);
+}
+
 }

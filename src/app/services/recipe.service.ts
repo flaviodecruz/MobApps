@@ -21,10 +21,14 @@ export class RecipeService {
     return this.http.get(`${this.API_URL}/complexSearch`, { params });
   }
 
-  getRecipeDetails(id: number): Observable<any> {
-    const params = new HttpParams()
-      .set('apiKey', this.API_KEY);
-
-    return this.http.get(`${this.API_URL}/${id}/information`, { params });
-  }
+  getRecipeDetails(id: number) {
+  return this.http.get(
+    `https://api.spoonacular.com/recipes/${id}/information`,
+    {
+      params: {
+        apiKey: this.API_KEY
+      }
+    }
+  );
+}
 }
