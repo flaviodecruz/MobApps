@@ -35,6 +35,9 @@ export class RecipeDetailsPage implements OnInit {
       this.recipe = res;
     });
   }
+get ingredients() {
+    return this.recipe?.extendedIngredients || [];
+  }
 
   // ⭐ FAVORITES LOGIC (same as Home)
 
