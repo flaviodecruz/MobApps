@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class RecipeService {
 
   private readonly API_URL = 'https://api.spoonacular.com/recipes';
-  private readonly API_KEY = '621f6ee4a37f4fa28e403b6dff0abc42';
+  private readonly API_KEY = '70759a4f7911402abcc53d3c51d3b759';
 
   constructor(private http: HttpClient) {}
 

@@ -3,29 +3,70 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title>Ingredients</ion-title>
+
+    <ion-title>{{ recipe?.title }}</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleFavorite()">
+        <ion-icon
+          [name]="isFavorite() ? 'heart' : 'heart-outline'">
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content>
 
-  <ion-card *ngFor="let ingredient of ingredients">
-    <img
-      *ngIf="ingredient.image"
-      [src]="'https://spoonacular.com/cdn/ingredients_500x500/' + ingredient.image"
-    />
+  <!-- IMAGE -->
+  <ion-img
+    *ngIf="recipe?.image"
+    [src]="recipe.image"
+    class="recipe-hero">
+  </ion-img>
 
-    <ion-card-content>
-      <h2>
-        {{ ingredient.amount }} {{ ingredient.unit }}
-        {{ ingredient.name }}
-      </h2>
+  <!-- INGREDIENTS -->
+  <ion-list *ngIf="ingredients.length">
+    <ion-list-header>
+      <ion-label>Ingredients</ion-label>
+    </ion-list-header>
 
-      <p *ngIf="ingredient.measures?.metric">
-        {{ ingredient.measures.metric.amount }}
-        {{ ingredient.measures.metric.unitShort }}
-      </p>
+    <ion-card *ngFor="let ing of ingredients">
+      <img *ngIf="ing.image"
+           [src]="'https://spoonacular.com/cdn/ingredients_250x250/' + ing.image" />
+
+      <ion-card-content>
+        <strong>{{ ing.original }}</strong>
+        <p>{{ ing.amount }} {{ ing.unit }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <!-- INSTRUCTIONS -->
+  <ion-card *ngIf="recipe?.instructions">
+    <ion-card-header>
+      <ion-card-title>Instructions</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content
+      [innerHTML]="recipe.instructions">
     </ion-card-content>
   </ion-card>
 
 </ion-content>
+
+<!-- FAVORITE BUTTON -->
+<ion-footer>
+  <ion-toolbar>
+    <ion-button
+      expand="block"
+      color="primary"
+      (click)="toggleFavorite()">
+      <ion-icon
+        slot="start"
+        [name]="isFavorite() ? 'heart' : 'heart-outline'">
+      </ion-icon>
+      {{ isFavorite() ? 'REMOVE FROM FAVORITES' : 'ADD TO FAVORITES' }}
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
