@@ -19,11 +19,12 @@
 <ion-content>
 
   <!-- IMAGE -->
-  <ion-img
-    *ngIf="recipe?.image"
-    [src]="recipe.image"
-    class="recipe-hero">
-  </ion-img>
+ <img
+  *ngIf="recipe?.image"
+  [src]="recipe.image"
+  class="recipe-image"
+/>
+
 
   <!-- INGREDIENTS -->
   <ion-list *ngIf="ingredients.length">
